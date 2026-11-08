@@ -1,0 +1,16 @@
+{
+  "name": "carwash-project",
+  "version": "1.0.0",
+  "description": "Car wash booking application with frontend and backend",
+  "main": "serve.js",
+  "scripts": {
+    "start": "node serve.js",
+    "serve": "node serve.js",
+    "backend": "cd backend && npm start",
+    "seed": "cd backend && node seed_services.js && node create_admin.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+

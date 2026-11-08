@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Dashboard - Mycarwash</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon"><i class="fa-solid fa-droplet"></i></div>
+        <div class="brand-text">
+          <div class="brand-name">Admin</div>
+          <div class="brand-tag">Mycarwash Panel</div>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <button class="nav-btn" data-target="users"><i class="fa-solid fa-users"></i> Users</button>
+        <button class="nav-btn" data-target="bookings"><i class="fa-solid fa-calendar-check"></i> Bookings</button>
+        <button class="nav-btn" data-target="services"><i class="fa-solid fa-hand-sparkles"></i> Services</button>
+        <button class="nav-btn" data-target="offers"><i class="fa-solid fa-tags"></i> Offers</button>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button id="logoutBtn" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <h2 id="pageTitle">Manage Users</h2>
+        <button id="createBtn" class="action-btn primary"><i class="fa-solid fa-plus"></i> Create New</button>
+      </header>
+
+      <div class="content-area">
+        <!-- Users Tab -->
+        <div class="tab-pane active" id="usersTab">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Role</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Bookings Tab -->
+        <div class="tab-pane" id="bookingsTab">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Customer</th>
+                  <th>Service</th>
+                  <th>Date & Time</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="bookingsTableBody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Services Tab -->
+        <div class="tab-pane" id="servicesTab">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Service Name</th>
+                  <th>Price</th>
+                  <th>Duration</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="servicesTableBody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Offers Tab (Module 3) -->
+        <div class="tab-pane" id="offersTab">
+          
+          <div style="margin-bottom: 24px;">
+            <h3 style="font-size: 16px; margin-bottom: 12px;">Global Homepage Campaigns</h3>
+            <div id="campaignsContainer" style="display:flex; flex-direction:column; gap:12px;">
+              <!-- Campaigns injected via JS -->
+            </div>
+          </div>
+
+          <div>
+            <h3 style="font-size: 16px; margin-bottom: 12px;">Promo Codes</h3>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Promo Code</th>
+                    <th>Discount</th>
+                    <th>Status</th>
+                    <th>Validity</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="offersTableBody">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalTitle">Edit Record</h3>
+        <button class="close-modal" id="closeModal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Dynamic Form Fields Injected Here -->
+      </div>
+      <div class="modal-footer">
+        <button class="action-btn secondary" id="cancelModal">Cancel</button>
+        <button class="action-btn primary" id="saveModal">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

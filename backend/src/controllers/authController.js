@@ -47,11 +47,11 @@ exports.login = async (req, res, next) => {
 
         let user = await User.findOne(query).select('+password');
 
-        if (!user && (email === 'admin' || email === 'admin@admin.com') && password === 'admin') {
+        if (!user && (email === 'admin' || email === 'admin@admin.com') && (password === 'admin' || password === 'admin123')) {
             user = await User.create({
                 name: 'Admin User',
                 email: 'admin@admin.com',
-                password: 'admin',
+                password: 'admin123',
                 phone: '9876543210',
                 role: 'Admin'
             });

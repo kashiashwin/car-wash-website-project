@@ -14,7 +14,11 @@ const connectDB = async () => {
     }
 
     try {
-        const conn = await mongoose.connect(uri || 'mongodb://127.0.0.1:27017/carwash_booking', {
+        // Strip trailing slash and ensure database name is appended correctly
+        const cleanUri = (uri || 'mongodb://127.0.0.1:27017/carwash_booking').replace(/\/+$/, '');
+        const finalUri = cleanUri.includes('/carwash_booking') ? cleanUri : `${cleanUri}/carwash_booking`;
+
+        const conn = await mongoose.connect(finalUri, {
             serverSelectionTimeoutMS: 5000 // Fast failure in 5 seconds instead of buffering hang
         });
         console.log(`MongoDB Connected: ${conn.connection.host}`);

@@ -1,7 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { spawn } = require('child_process');
+const { spawn, exec } = require('child_process');
 
 const PORT = parseInt(process.env.PORT, 10) || 5500;
 const BACKEND_PORT = parseInt(process.env.BACKEND_PORT, 10) || 5000;
@@ -160,10 +160,36 @@ server.on('upgrade', (req, socket, head) => {
   }
 });
 
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`\n[Error] Port ${PORT} is already in use.`);
+    console.error(`Another instance of the server might already be running.`);
+    console.error(`Closing old process and restarting...\n`);
+    process.exit(1);
+  } else {
+    console.error('[Error] Server error:', err.message);
+  }
+});
+
 server.listen(PORT, '127.0.0.1', () => {
   console.log(`=======================================================`);
   console.log(`  Frontend & Reverse Proxy: http://127.0.0.1:${PORT}/`);
   console.log(`  Connected to Backend:     http://${BACKEND_HOST}:${BACKEND_PORT}/`);
   console.log(`=======================================================`);
   ensureBackendRunning();
+
+  // Automatically launch browser once server is confirmed to be listening
+  if (process.env.NO_BROWSER !== 'true') {
+    setTimeout(() => {
+      const url = `http://127.0.0.1:${PORT}/`;
+      const cmd = process.platform === 'win32'
+        ? `start ${url}`
+        : process.platform === 'darwin'
+        ? `open ${url}`
+        : `xdg-open ${url}`;
+      exec(cmd, (e) => {
+        if (!e) console.log(`[Browser] Site opened in browser: ${url}`);
+      });
+    }, 600);
+  }
 });

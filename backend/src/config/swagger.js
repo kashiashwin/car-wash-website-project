@@ -1,3 +1,4 @@
+const path = require('path');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
@@ -11,7 +12,7 @@ const options = {
         },
         servers: [
             {
-                url: 'http://localhost:5000',
+                url: '/api/v1',
             },
         ],
         components: {
@@ -27,7 +28,7 @@ const options = {
             bearerAuth: []
         }]
     },
-    apis: ['./src/routes/*.js'], // Path to the API docs
+    apis: [path.join(__dirname, '../routes/*.js')], // Absolute path to the API docs
 };
 
 const specs = swaggerJsdoc(options);

@@ -28,6 +28,17 @@ app.use(helmet());
 // Enable CORS
 app.use(cors());
 
+// Ensure database is connected before handling API requests
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (err) {
+        console.error('Database connection failed:', err.message);
+        res.status(500).json({ success: false, error: 'Database connection failed. Please check MONGO_URI configuration.' });
+    }
+});
+
 const path = require('path');
 // Serve static frontend
 app.use(express.static(path.join(__dirname, '../../frontend')));
